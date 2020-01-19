@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  vars:
+    kompose_install_dir: /opt/kompose/bin
+  roles:
+    - role: xanmanning.kompose

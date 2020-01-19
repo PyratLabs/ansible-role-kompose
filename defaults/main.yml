@@ -1,0 +1,7 @@
+---
+
+# Use a specific version of kompose, eg. `1.19.0`. Specify `false` for latest.
+kompose_version: false
+
+# Installation directory for kompose.
+kompose_install_dir: "{{ ansible_user_dir }}/bin"

@@ -1,0 +1,16 @@
+---
+
+- name: Ensure target host architecture information is set as a fact
+  set_fact:
+    kompose_arch: "{{ kompose_arch_lookup[ansible_architecture].arch }}"
+    kompose_arch_suffix: "{{ kompose_arch_lookup[ansible_architecture].suffix }}"
+
+- name: Get the binary path for kompose
+  set_fact:
+    kompose_binary_path: "v{{ kompose_version }}/kompose-linux-{{ kompose_arch_suffix }}"
+
+- name: Ensure kompose binary is downloaded
+  get_url:
+    url: "{{ kompose_github_download_url }}/{{ kompose_binary_path }}"
+    dest: "/tmp/kompose-{{ kompose_version }}"
+    mode: 0600

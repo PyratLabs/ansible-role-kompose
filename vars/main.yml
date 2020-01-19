@@ -1,0 +1,30 @@
+---
+
+kompose_arch_lookup:
+  amd64:
+    arch: amd64
+    suffix: "amd64"
+  x86_64:
+    arch: amd64
+    suffix: "amd64"
+  arm64:
+    arch: arm64
+    suffix: "arm"
+  aarch64:
+    arch: arm64
+    suffix: "arm"
+  arm:
+    arch: arm
+    suffix: "arm"
+  arm7:
+    arch: arm
+    suffix: "arm"
+  armv7l:
+    arch: arm
+    suffix: "arm"
+  armhf:
+    arch: arm
+    suffix: "arm"
+
+kompose_github_url: https://github.com/kubernetes/kompose
+kompose_github_download_url: "{{ kompose_github_url }}/releases/download"

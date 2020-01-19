@@ -1,0 +1,12 @@
+---
+
+- name: Get the version information of the latest release of kompose
+  uri:
+    url: https://api.github.com/repos/kubernetes/kompose/releases/latest
+    return_content: true
+    body_format: json
+  register: kompose_get_latest_version
+
+- name: Ensure the kompose_version variable is set
+  set_fact:
+    kompose_version: "{{ kompose_get_latest_version.json.tag_name | regex_replace('^v', '') }}"

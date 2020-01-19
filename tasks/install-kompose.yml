@@ -1,0 +1,31 @@
+---
+
+- name: Ensure kompose_install_dir exists
+  file:
+    path: "{{ kompose_install_dir }}"
+    state: directory
+
+- name: Ensure existing kompose package is moved to keep an copy of the old version
+  command: >
+      mv {{ kompose_install_dir }}/kompose
+      {{ kompose_install_dir }}/kompose-{{ kompose_check_existing_version.stdout_lines[0] }}
+  when:
+    kompose_check_existing.stat.islnk is defined
+    and not kompose_check_existing.stat.islnk
+    and kompose_check_existing_version.stdout_lines[0] != kompose_version
+
+- name: Ensure kompose binary is copied to the installation directory
+  copy:
+    src: "/tmp/kompose-{{ kompose_version }}"
+    dest: "{{ kompose_install_dir }}/kompose-{{ kompose_version }}"
+    remote_src: true
+    mode: 0755
+  when: not kompose_check_existing.stat.exists
+        or (kompose_check_existing.stat.exists
+            and kompose_check_existing_version.stdout_lines[0] != kompose_version)
+
+- name: Ensure kompose package is symlinked
+  file:
+    src: "{{ kompose_install_dir }}/kompose-{{ kompose_version }}"
+    dest: "{{ kompose_install_dir }}/kompose"
+    state: link

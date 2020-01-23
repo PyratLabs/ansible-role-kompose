@@ -2,7 +2,7 @@
 
 - name: Get the version information of the latest release of kompose
   uri:
-    url: https://api.github.com/repos/kubernetes/kompose/releases/latest
+    url: "{{ kompose_github_api }}/releases/latest"
     return_content: true
     body_format: json
   register: kompose_get_latest_version

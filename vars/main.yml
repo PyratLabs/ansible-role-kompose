@@ -27,4 +27,5 @@ kompose_arch_lookup:
     suffix: "arm"
 
 kompose_github_url: https://github.com/kubernetes/kompose
+kompose_github_api: https://api.github.com/repos/kubernetes/kompose
 kompose_github_download_url: "{{ kompose_github_url }}/releases/download"
